@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="What Type of American Are You? Take this fun personality quiz!" />
+  <title>What Type of American Are You?</title>
+
+  <!-- MANDATORY SDK: Facebook Instant Games SDK v6.3 (must be in head) -->
+  <script src="https://connect.facebook.net/en_US/fbinstant.6.3.js"></script>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #1a1a2e;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    #gameCanvas {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    #splash {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 100%);
+      z-index: 100;
+      transition: opacity 0.4s ease;
+    }
+    #splash.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #splash-title {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 800;
+      text-align: center;
+      padding: 0 20px;
+    }
+    #splash-emoji {
+      font-size: 56px;
+      animation: float 2s ease-in-out infinite;
+    }
+    #splash-text {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+      font-weight: 600;
+    }
+    #splash-bar-wrap {
+      width: 70vw;
+      max-width: 280px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    #splash-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #E91E63, #FFC857, #2EC4B6);
+      transition: width 0.15s ease-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Splash Screen -->
+  <div id="splash">
+    <div id="splash-emoji">🇺🇸</div>
+    <div id="splash-title">What Type of American Are You?</div>
+    <div id="splash-text">Loading Quiz... 0%</div>
+    <div id="splash-bar-wrap">
+      <div id="splash-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- Game Canvas -->
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- Local Game Logic -->
+  <script src="game.js"></script>
+</body>
+</html>
